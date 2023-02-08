@@ -1,0 +1,47 @@
+#include<stdio.h>
+int main()
+{
+    int c=0;
+    int n,k,i,low,high,mid,a[50],temp;
+    printf("Enter number of elements:");
+    scanf("%d",&n);
+    printf("Enter elements:\n");
+    for(i=0;i<n;i++)
+    {
+        c++;
+        scanf("%d",&a[i]);
+    }
+    c++;
+    printf("Enter Element to search:");
+    scanf("%d",&k);
+    low=0;   c++;
+    high=n-1;   c++;
+    mid=low+high/2;   c++;
+    c++;
+    while(low<=high)
+    {
+        c++;
+        c++;
+        if(a[mid]<k)
+        {
+            low=mid+1;  c++;
+        }
+        else if(a[mid]==k)
+        {
+            printf("\nElement is found at index %d\n",mid);
+            break;
+        }
+        else
+        {
+            high=mid-1;  c++;
+        }
+        mid=(low+high)/2;   c++;
+    }
+    c++;
+    c++;
+    if(low>high)
+    {
+        printf("Element is not found\n");
+    }
+    printf("\nTime Complexity : %d\n",c);
+}
