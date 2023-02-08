@@ -1,29 +1,36 @@
-#include <stdio.h>
+#include<stdio.h>
 int main()
 {
-  int array[100], search, c, n;
-
-  printf("Enter number of elements in array\n");
-  scanf("%d", &n);
-
-  printf("Enter %d integer(s)\n", n);
-
-  for (c = 0; c < n; c++)
-    scanf("%d", &array[c]);
-
-  printf("Enter a number to search\n");
-  scanf("%d", &search);
-
-  for (c = 0; c < n; c++)
-  {
-    if (array[c] == search)    /* If required element is found */
+    int c=0;
+    int n,k,i,j,f=0,a[50];
+    c++;
+    printf("Enter number of elements:");
+    scanf("%d",&n);
+    printf("Enter elements:\n");
+    for(i=0;i<n;i++)
     {
-      printf("%d is present at location %d.\n", search, c+1);
-      break;
+        c++;
+        scanf("%d",&a[i]);
     }
-  }
-  if (c == n)
-    printf("%d isn't present in the array.\n", search);
-
-  return 0;
+    c++;
+    printf("Enter Element to search:");
+    scanf("%d",&k);
+    for(i=0;i<n;i++)
+    {
+        c++;
+        c++;
+        if(k==a[i])
+        {
+            printf("Element is found at index %d\n",i);
+            f=1;
+            c++;
+        }
+    }
+    c++;
+    c++;
+    if(f==0)
+    {
+        printf("Element is not found");
+    }
+    printf("\nTime Complexity : %d",c);
 }
