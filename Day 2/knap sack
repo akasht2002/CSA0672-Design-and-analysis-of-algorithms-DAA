@@ -72,3 +72,4 @@ int main() {
    knapsack(num, weight, profit, capacity);
    return(0);
 }
+..
