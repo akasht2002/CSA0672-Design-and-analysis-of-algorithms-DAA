@@ -1,0 +1,55 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+
+#define MAX_NODES 100
+#define MIN(a, b) ((a) < (b) ? (a) : (b))
+
+int keys[MAX_NODES]; // array of keys
+int freq[MAX_NODES]; // frequency of each key
+int cost[MAX_NODES][MAX_NODES]; // cost matrix
+int sum[MAX_NODES]; // cumulative frequency
+int dp[MAX_NODES][MAX_NODES]; // dp array to store subproblems
+
+int n; // number of nodes
+
+int optimalSearchTree(int i, int j) {
+  if (dp[i][j] != -1) {
+    return dp[i][j];
+  }
+  if (i == j) {
+    return dp[i][j] = freq[i];
+  }
+  int minCost = INT_MAX;
+  for (int r = i; r <= j; r++) {
+    int c = optimalSearchTree(i, r - 1) + optimalSearchTree(r + 1, j) + sum[j] - sum[i - 1];
+    minCost = MIN(minCost, c);
+  }
+  return dp[i][j] = minCost;
+}
+
+int main() {
+  printf("Enter the number of nodes: ");
+  scanf("%d", &n);
+
+  for (int i = 0; i < n; i++) {
+    printf("Enter key[%d] and its frequency: ", i);
+    scanf("%d%d", &keys[i], &freq[i]);
+  }
+
+  // calculate cumulative frequency
+  for (int i = 0; i < n; i++) {
+    sum[i] = sum[i - 1] + freq[i];
+  }
+
+  // initialize dp array
+  for (int i = 0; i < n; i++) {
+    for (int j = 0; j < n; j++) {
+      dp[i][j] = -1;
+    }
+  }
+
+  printf("The minimum cost of the optimal binary search tree is: %d\n", optimalSearchTree(0, n - 1));
+
+  return 0;
+}
