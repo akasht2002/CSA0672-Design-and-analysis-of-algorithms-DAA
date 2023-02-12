@@ -1,0 +1,99 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+#define MAX 100
+
+int list[MAX];
+int position, num, size = 0;
+
+void insertAtBeginning() {
+  int i;
+  if (size == MAX) {
+    printf("List is full. Cannot insert at the beginning\n");
+    return;
+  }
+
+  for (i = size; i > 0; i--) {
+    list[i] = list[i - 1];
+  }
+
+  list[0] = num;
+  size++;
+  printf("Number %d inserted at position %d\n", num, position);
+}
+
+void insertInMiddle() {
+  int i;
+  if (size == MAX) {
+    printf("List is full. Cannot insert in the middle\n");
+    return;
+  }
+
+  for (i = size; i > position - 1; i--) {
+    list[i] = list[i - 1];
+  }
+
+  list[position - 1] = num;
+  size++;
+  printf("Number %d inserted at position %d\n", num, position);
+}
+
+void insertAtLast() {
+  if (size == MAX) {
+    printf("List is full. Cannot insert at the end\n");
+    return;
+  }
+
+  list[size] = num;
+  size++;
+  printf("Number %d inserted at position %d\n", num, size);
+}
+
+int main() {
+  int choice;
+  while (1) {
+    printf("1. Insert at the beginning\n");
+    printf("2. Insert in the middle\n");
+    printf("3. Insert at the last\n");
+    printf("4. Exit\n");
+    printf("Enter your choice: ");
+    scanf("%d", &choice);
+
+    switch (choice) {
+      case 1:
+        printf("Enter the number to insert: ");
+        scanf("%d", &num);
+        position = 1;
+        insertAtBeginning();
+        break;
+
+      case 2:
+        printf("Enter the number to insert: ");
+        scanf("%d", &num);
+        printf("Enter the position to insert the number: ");
+        scanf("%d", &position);
+        if (position < 1 || position > size + 1) {
+          printf("Invalid position\n");
+        } else {
+          insertInMiddle();
+        }
+        break;
+
+      case 3:
+        printf("Enter the number to insert: ");
+        scanf("%d", &num);
+        position = size + 1;
+        insertAtLast();
+        break;
+
+      case 4:
+        exit(0);
+
+      default:
+        printf("Invalid choice\n");
+        break;
+    }
+  }
+
+  return 0;
+}
